@@ -6,7 +6,6 @@
 a {
     color: white;
     text-decoration: none; /* tira configuração do sublinhado */
-    transition: 0.3s;
 }
 
 a:hover {
@@ -25,13 +24,13 @@ nav {
     align-items: center;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     background-color: #23232e;
-    height: 10vh;
+    height: 8vh;
 }
 
 main {
-    background-image: url(../imagem/bg.jpg);
+    background-image: url(../imagem/bg.jpg); /* salvo pelo site https://unsplash.com/ */
     background-size: cover;
-    height: 90vh;
+    height: 92vh;
 }
 
 /* lista de itens do menu */
@@ -47,40 +46,47 @@ main {
 }
 
 /* configurar linhas da lista do menu nav-bar */
-
-.mobile-menu div{
-    width: 32px;
-    height: 2px;
-    background: white ;
-    margin: 8px;
-}
+/* menu hamburguer */
 
 .mobile-menu {
     cursor: pointer;  /* ao aproximar mouse, vira mãozinha */
     display: none; /* aparecerá somente em telas pequenas */
 }
 
-/* configurando Nav-bar para telas inferior a 999px, onde aparecera os itens ao lado. */
+.mobile-menu div {
+    width: 32px;
+    height: 2px;
+    background: white ;
+    margin: 8px;
 
-@media (max-width: 999px) {
+    transition: 0.3s; /* quando mobile-menu hamburguer estiver ativo */
+}
 
-    body {
-        overflow-x: hidden; /* mover toda a lista para fora, enquanto a tela não atingir 999px */
-    };
+/* configurando Nav-bar para telas acima de 999px, aparecera os itens ao lado. */
+/* abaixo aparecerá somente o menu hamburger com 3 tracejados */
+
+@media (max-width: 1000px) {
+
+        /* body {
+        overflow-x: hidden; */
+        /* desaparecera a navegação do menu fora da tela, (transform: translateX(100%) */ 
+        /*  }  */
 
     .nav-list {
         position: absolute;
-        top: 10vh;
+        top: 8vh;
         right: 0;
         width: 50vw; /* metade da tela */
-        height: 90vh;
+        height: 92vh;
         background-color: #23232e;
         flex-direction: column;
         align-items: center;
         justify-content: space-around; /* dando espaço entre itens */
 
-        transform: translateX(100%); /* mover toda a lista para fora, enquanto a tela não atingir 999px */
+        /* toda a navegação do menu sai para fora da tela */
+        transform: translateX(100%);
 
+        /* transição suave, ao abrir o menu hamburguer */
         transition: transform 0.3s ease-in;
     }
 
@@ -96,25 +102,30 @@ main {
     }
 
     .nav-list.active {
-        transform: translateX(0); /* mover toda a lista para fora, enquanto a tela não atingir 999px, quando ativo voltará a posição zero */
+        transform: translateX(0); /* mover toda a lista de fora / para dentro, ou seja, quando a tela atingir 999px, 
+        nav.list ficará ativo voltará a posição zero, com menu hamburguer */
     }
 
-    @keyframes navLinkFade {
-        from {
-            opacity: 0;
-            transform: translateX(50px); 
-        }
+    /* ================================================================== */
+    /* javascript */
+    /* ================================================================== */
 
-        to {
+    @keyframes navLinkFade {
+        from { 
+            opacity: 0;
+            transform: translateX(50px); /* da esquerda para direita */
+        } to { 
             opacity: 1;
             transform: translateX(0);
         }
-        
     }
+
+    /* efeito para o menu hamburguer, usando javascript */
+    /* this.mobileMenu.classList.toggle(this.activeClass); */
 
     .mobile-menu.active .line1 {
         transform: rotate(-45deg) translate(-8px, 8px);
-    }
+    }   
 
     .mobile-menu.active .line2 {
         opacity: 0;
